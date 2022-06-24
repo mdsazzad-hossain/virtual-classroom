@@ -1,0 +1,21 @@
+{
+  "name": "virtual-classroom",
+  "version": "1.0.0",
+  "description": "Its a virtual classroom.Teacher and students will be benifited by using this application.",
+  "main": "app.js",
+  "scripts": {
+    "sss": "nodemon app.js"
+  },
+  "author": "Sazzad Hossain",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "ejs": "^3.1.8",
+    "express": "^4.18.1",
+    "mongodb": "^4.7.0",
+    "mongoose": "^6.4.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.18"
+  }
+}

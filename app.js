@@ -1,8 +1,10 @@
 const Path = require('path');
 const BodyParser = require('body-parser');
 const Express = require('express')
+const ExpressLayouts = require('express-ejs-layouts')
 const Mongoose = require('mongoose')
-const ErrorController = require('./controllers/error')
+const HomeRoutes = require('./routes/home')
+// const ErrorController = require('./controllers/error')
 
 const dbUrl = "mongodb://localhost:27017"
 const app = Express();
@@ -11,12 +13,14 @@ const app = Express();
 app.set('view engine', 'ejs')
 app.set('views', 'views')
 
+app.use(ExpressLayouts)
 app.use(BodyParser.urlencoded({extended: false}))
 app.use(Express.static('public'))
 // app.use(path.join(__dirname,'../', 'views', 'index.html'))
 
 //routes
-app.use(ErrorController.get404)
+// app.use(ErrorController.get404)
+app.use(HomeRoutes)
 
 //db connection
 Mongoose.connect(dbUrl, {

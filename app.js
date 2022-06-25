@@ -1,18 +1,20 @@
 const Path = require('path');
 const BodyParser = require('body-parser');
+const toastr = require('express-toastr');
 const Express = require('express')
 const ExpressLayouts = require('express-ejs-layouts')
 const Mongoose = require('mongoose')
 const HomeRoutes = require('./routes/home')
 // const ErrorController = require('./controllers/error')
 
-const dbUrl = "mongodb://localhost:27017"
+const dbUrl = "mongodb://localhost:27017/virtual_classroom"
 const app = Express();
 
 //template engine
 app.set('view engine', 'ejs')
 app.set('views', 'views')
 
+app.use(toastr());
 app.use(ExpressLayouts)
 app.use(BodyParser.urlencoded({extended: false}))
 app.use(Express.static('public'))

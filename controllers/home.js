@@ -5,7 +5,18 @@ exports.getData = (req, res, next)  => {
 }
 
 exports.getTeacherList = (req, res, next)  => {
-    res.render('./teacher/list', {pageName: 'teacher-list'})
+    const listData = Teacher.find()
+    .then((r)=>{
+        res.render('./teacher/list', {
+            pageName: 'teacher-list',
+            path: '/teacher-list',
+            listData: r
+        });
+
+    })
+    .catch((err)=>{
+        console.log(err);
+    })
 }
 
 exports.getCreateTeacher = (req, res, next)  => {
@@ -15,12 +26,11 @@ exports.getCreateTeacher = (req, res, next)  => {
 exports.storeData = (req, res, next)  => {
     const data = new Teacher({
         name: req.body.name,
-        password: req.body.password,
+        email: req.body.email,
     })
     data.save()
     .then((result)=>{
-        console.log(result);
-        req.toastr.success('Successfully logged in.');
+        res.status(200);
         res.redirect('/teacher-list');
     })
     .catch((err)=>{

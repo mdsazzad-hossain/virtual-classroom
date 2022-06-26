@@ -16,6 +16,7 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="/dist/css/adminlte.min.css">
 </head>
+<% if(pageName != 'teacher-login') { %>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
 <!-- ./wrapper -->
@@ -284,4 +285,8 @@
 <script src="/dist/js/adminlte.min.js"></script>
 <!-- AdminLTE for demo purposes -->
 </body>
+<% } %>
+<% if(pageName === 'teacher-login') { %>
+  <%- body %>
+<% } %>
 </html>

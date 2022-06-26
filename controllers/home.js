@@ -46,12 +46,13 @@ exports.storeData = (req, res, next)  => {
     .then((result)=>{
         res.status(200);
         res.redirect('/teacher-list');
+        let pass = 1234
         return mailer.sendMail({
             to: req.body.email,
-            from: 'smtp.mailtrap.io',
-            subject: 'Hello',
-            text: 'Hello world?',
-            html: '<b>Hello world?</b>'
+            from: 'admin@admin.com',
+            subject: 'Teacher Login Link',
+            text: 'Hello Teacher,',
+            html: '<h4>Here is you login link.<a href="http://localhost:3000/teacher-login">Click Here</a></br>Password:</4>'+' '+pass
         });
     })
     .catch((err)=>{

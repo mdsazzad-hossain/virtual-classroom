@@ -5,6 +5,7 @@ const Express = require('express')
 const ExpressLayouts = require('express-ejs-layouts')
 const Mongoose = require('mongoose')
 const HomeRoutes = require('./routes/home')
+const TeacherRoutes = require('./routes/teacher')
 // const ErrorController = require('./controllers/error')
 
 const dbUrl = "mongodb://localhost:27017/virtual_classroom"
@@ -23,6 +24,7 @@ app.use(Express.static('public'))
 //routes
 // app.use(ErrorController.get404)
 app.use(HomeRoutes)
+app.use(TeacherRoutes)
 
 //db connection
 Mongoose.connect(dbUrl, {

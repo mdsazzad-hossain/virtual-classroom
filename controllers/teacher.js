@@ -1,7 +1,20 @@
-const path = require('path')
-// const Teacher = require('../models/teacher');
+const path = require('path');
+const Teacher = require('../models/teacher');
 
 
-exports.teacherLoginPage = (req, res, next)  => {
-    res.render('./auth/login', {pageName: 'teacher-login'});
+exports.loginPage = (req, res, next)  => {
+    console.log(req.query.title)
+    res.render('./auth/login', {pageName: 'teacher-login', q: req.query.q || ''});
+}
+
+exports.login = (req, res, next)  => {
+    const mathch = Teacher.findOne({password: req.body.password})
+        .then((r) => {
+            res.status(200);
+            res.redirect('/dashboard');
+            
+        })
+        .catch((err) => {
+            console.log(err);
+        })
 }

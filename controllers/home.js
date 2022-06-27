@@ -9,8 +9,8 @@ const mailer = nodemailer.createTransport({
     port: 2525,
     secure: false,
     auth: {
-        user: '623fbe82aaa3a4',
-        pass: '19cf811e86b38a'
+        user: '44adf618471565',
+        pass: 'a503801092cc14'
     }
 });
 

@@ -8,6 +8,7 @@ exports.loginPage = (req, res, next)  => {
 }
 
 exports.login = (req, res, next)  => {
+    req.session.isLoggedIn = true;
     const mathch = Teacher.findOne({password: req.body.password})
         .then((r) => {
             res.status(200);

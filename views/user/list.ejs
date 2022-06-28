@@ -1,8 +1,8 @@
 <div class="card">
     <div class="card-header flex">
-      <h3 class="card-title">Teacher List</h3>
-      <a href="/create-teacher" class="float-right btn btn-primary">
-        <i class="fa fa-plus mr-2"></i>Add Teacher
+      <h3 class="card-title">User List</h3>
+      <a href="/create-user" class="float-right btn btn-primary">
+        <i class="fa fa-plus mr-2"></i>Add User
       </a>
     </div>
     <!-- /.card-header -->
@@ -11,8 +11,9 @@
         <thead>
         <tr>
           <th>SL#</th>
-          <th>Teacher Name</th>
+          <th>Name</th>
           <th>Email</th>
+          <th>Type</th>
           <th>Action</th>
         </tr>
         </thead>
@@ -23,6 +24,7 @@
                     <td><%= index+1 %></td>
                     <td><%= item.name %></td>
                     <td><%= item.email %></td>
+                    <td><%= item.type %></td>
                     <td>
                         <a href="#" class="btn btn-primary btn-xs">
                             <i class="fa fa-pen"></i>

@@ -7,8 +7,9 @@
     <div class="card">
       <div class="card-body login-card-body">
         <p class="login-box-msg">Sign in to start your session</p>
-
         <form action="/login" method="post">
+          <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+          <%= q %>
           <% if(q === '') {%>
           <div class="input-group mb-3">
             <input type="email" class="form-control" placeholder="Email">

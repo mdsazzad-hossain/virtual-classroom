@@ -6,7 +6,7 @@ const toastr = require('express-toastr');
 const Express = require('express')
 const ExpressLayouts = require('express-ejs-layouts')
 const Mongoose = require('mongoose')
-const HomeRoutes = require('./routes/home')
+const UserRoutes = require('./routes/user')
 const TeacherRoutes = require('./routes/teacher')
 // const ErrorController = require('./controllers/error')
 
@@ -38,7 +38,7 @@ app.use(
 
 //routes
 // app.use(ErrorController.get404)
-app.use(HomeRoutes)
+app.use(UserRoutes)
 app.use(TeacherRoutes)
 
 //db connection

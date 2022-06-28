@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AdminLTE 3 | Blank Page</title>
+  <title>Virtual Classroom</title>
 
   <!-- Google Font: Source Sans Pro -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700&display=fallback">
@@ -16,7 +16,7 @@
   <!-- Theme style -->
   <link rel="stylesheet" href="/dist/css/adminlte.min.css">
 </head>
-<% if(pageName != 'teacher-login') { %>
+<% if(pageName != 'user-login') { %>
 <body class="hold-transition sidebar-mini">
 <!-- Site wrapper -->
 <!-- ./wrapper -->
@@ -205,10 +205,10 @@
             </a>
           </li>
           <li class="nav-item">
-            <a href="/teacher-list" class="nav-link">
+            <a href="/user-list" class="nav-link">
               <i class="nav-icon fas fa-copy"></i>
               <p>
-                Teacher Module
+                User Module
                 <!-- <i class="fas fa-angle-left right"></i> -->
               </p>
             </a>
@@ -249,7 +249,7 @@
 <script src="/plugins/jquery/jquery.min.js"></script>
 <!-- Bootstrap 4 -->
 
-<% if(pageName === 'teacher-list') { %>
+<% if(pageName === 'user-list') { %>
 <!-- DataTables  & Plugins -->
 <script src="../../plugins/datatables/jquery.dataTables.min.js"></script>
 <script src="../../plugins/datatables-bs4/js/dataTables.bootstrap4.min.js"></script>

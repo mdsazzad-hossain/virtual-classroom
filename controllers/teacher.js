@@ -4,7 +4,7 @@ const Teacher = require('../models/teacher');
 
 exports.loginPage = (req, res, next)  => {
     console.log(req.query.title)
-    res.render('./auth/login', {pageName: 'teacher-login', q: req.query.q || ''});
+    res.render('./auth/login', {pageName: 'user-login', q: req.query.q || ''});
 }
 
 exports.login = (req, res, next)  => {

@@ -89,15 +89,18 @@ exports.loginPage = (req, res, next)  => {
 }
 
 exports.login = (req, res, next)  => {
-    req.session.isLoggedIn = true;
-    const mathch = User.findOne({email: req.body.email, password: req.body.password})
-        .then((r) => {
-            if (!mathch) {
-                req.flash('error', 'Invalid email and password!')
-            }
-            req.flash('error', 'Login successfull!')
-            res.status(200);
-            res.redirect('/dashboard');
+    User.findOne({email: req.body.email, password: req.body.password})
+    .then((user) => {
+        if (!user) {
+            req.flash('error', 'Invalid email and password!')
+            return res.redirect('/')
+        }
+        req.session.isLoggedIn = true;
+            console.log(user);
+            // req.session.type = match.type;
+            // req.flash('error', 'Login successfull!')
+            // res.status(200);
+            // res.redirect('/dashboard');
             // res.render('home', {
             //     pageName: 'home', 
             //     csrfToken: req.csrfToken()

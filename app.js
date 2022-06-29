@@ -9,7 +9,8 @@ const flash = require('connect-flash');
 const ExpressLayouts = require('express-ejs-layouts')
 const Mongoose = require('mongoose')
 const UserRoutes = require('./routes/user')
-const TeacherRoutes = require('./routes/teacher')
+const ClassRoutes = require('./routes/class')
+const StudentRoutes = require('./routes/student')
 // const ErrorController = require('./controllers/error')
 
 const dbUrl = "mongodb://localhost:27017/virtual_classroom"
@@ -44,7 +45,8 @@ app.use(
 //routes
 // app.use(ErrorController.get404)
 app.use(UserRoutes)
-app.use(TeacherRoutes)
+app.use(ClassRoutes)
+app.use(StudentRoutes)
 
 //db connection
 Mongoose.connect(dbUrl, {

@@ -1,0 +1,31 @@
+<section class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card card-primary mt-5">
+                    <div class="card-header">
+                        <h3 class="card-title">Create Class</h3>
+                    </div>
+                    <form action="/store-class" method="post">
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">Class Name</label>
+                                <input type="text" name="name" class="form-control" value="<%= editMode ? data.name : '' %>" id="exampleInputEmail1"
+                                    placeholder="Enter class name">
+                            </div>
+                            <div class="form-group">
+                                <label for="">Description</label>
+                                <textarea type="text" name="description" class="form-control" 
+                                placeholder="Enter class description"><%= editMode ? data.description : '' %></textarea>
+                            </div>
+                        </div>
+
+                        <div class="card-footer">
+                            <button type="submit" class="btn btn-primary">Submit</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+</section>

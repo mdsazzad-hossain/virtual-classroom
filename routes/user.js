@@ -14,5 +14,6 @@ router.get('/sign-up', UserController.getRegisterUser)
 router.post('/logout', UserController.logout)
 router.post('/store-user', UserController.storeData)
 router.get('/user', UserController.getUserById)
+router.get('/delete-user', UserController.deleteUser)
 
 module.exports = router

@@ -1,0 +1,41 @@
+<div class="card m-3">
+    <div class="card-header flex">
+      <h3 class="card-title">Class List</h3>
+      <a href="/create-class" class="float-right btn btn-primary">
+        <i class="fa fa-plus mr-2"></i>Add Class
+      </a>
+    </div>
+    <div class="card-body">
+      <table id="example1" class="table table-bordered table-striped">
+        <thead>
+        <tr>
+          <th>SL#</th>
+          <th>Name</th>
+          <th>Description</th>
+          <th>Invitation Code</th>
+          <th>Action</th>
+        </tr>
+        </thead>
+        <% if (classList.length > 0) { %>
+          <tbody>
+              <% classList.forEach(function(item, index){ %>
+                  <tr>
+                      <td><%= index+1 %></td>
+                      <td><%= item.name %></td>
+                      <td><%= item.description %></td>
+                      <td><%= item.invite_code %></td>
+                      <td>
+                          <a href="/edit-class?id=<%= item._id%>" class="btn btn-primary btn-xs">
+                              <i class="fa fa-pen"></i>
+                          </a>
+                          <a href="/delete-class?id=<%= item._id%>" class="btn btn-danger btn-xs">
+                              <i class="fa fa-trash"></i>
+                          </a>
+                      </td>
+                  </tr>
+              <% }); %>
+          </tbody>
+          <% } %>
+      </table>
+    </div>
+  </div>

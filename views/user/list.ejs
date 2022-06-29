@@ -17,6 +17,7 @@
           <th>Action</th>
         </tr>
         </thead>
+        
         <% if (listData.length > 0) { %>
         <tbody>
             <% listData.forEach(function(item, index){ %>
@@ -29,7 +30,7 @@
                         <a href="/user?id=<%= item._id%>" class="btn btn-primary btn-xs">
                             <i class="fa fa-pen"></i>
                         </a>
-                        <a href="#" class="btn btn-danger btn-xs">
+                        <a href="/delete-user?id=<%= item._id%>" class="btn btn-danger btn-xs">
                             <i class="fa fa-trash"></i>
                         </a>
                     </td>

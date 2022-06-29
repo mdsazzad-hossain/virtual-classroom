@@ -9,16 +9,16 @@ const mailer = nodemailer.createTransport({
     port: 2525,
     secure: false,
     auth: {
-        user: '44adf618471565',
-        pass: 'a503801092cc14'
-        // user: '623fbe82aaa3a4',
-        // pass: '19cf811e86b38a'
+        // user: '44adf618471565',
+        // pass: 'a503801092cc14'
+        user: '623fbe82aaa3a4',
+        pass: '19cf811e86b38a'
     }
 });
 
 
 exports.getData = (req, res, next) => {
-    res.render('home', { pageName: 'home', csrfToken: req.csrfToken() })
+    res.render('home', { pageName: 'home', csrfToken: req.csrfToken(), type: req.session.type })
 }
 
 exports.getUserList = (req, res, next) => {
@@ -27,7 +27,8 @@ exports.getUserList = (req, res, next) => {
             res.render('./user/list', {
                 pageName: 'user-list',
                 path: '/user-list',
-                csrfToken: req.csrfToken(), 
+                csrfToken: req.csrfToken(),
+                type: req.session.type, 
                 listData: r
             });
 
@@ -39,7 +40,13 @@ exports.getUserList = (req, res, next) => {
 
 exports.getCreateUser = (req, res, next) => {
     
-    res.render('./user/create', { pageName: 'create-user', csrfToken: req.csrfToken(), errorMessage: req.flash('error')})
+    res.render('./user/create', { 
+        pageName: 'create-user', 
+        csrfToken: req.csrfToken(), 
+        editMode: false, 
+        type: req.session.type,
+        errorMessage: req.flash('error')
+    })
 }
 
 exports.getRegisterUser = (req, res, next) => {
@@ -53,20 +60,20 @@ exports.getRegisterUser = (req, res, next) => {
 
 exports.storeData = (req, res, next) => {
     const salt = bcrypt.genSaltSync(8);
-    const pass = bcrypt.hashSync(req.body.password, salt);
+    const pass = bcrypt.hashSync(req.body.password || '1234', salt);
     
     const data = new User({
         name: req.body.name,
         email: req.body.email,
         password: pass,
-        type: req.body.type
+        type: req.body.type || 'Admin'
     })
     data.save()
         .then((result) => {
             req.flash('error', 'Data store successfull!')
             res.status(200);
-            res.redirect('/');
-            if (req.session.isLoggedIn && req.body.type === 'Admin') {
+            res.redirect('/user-list');
+            if (req.session.isLoggedIn && req.session.type === 'Admin') {
                 return mailer.sendMail({
                     to: req.body.email,
                     from: 'admin@admin.com',
@@ -86,13 +93,26 @@ exports.getUserById = (req, res, next) => {
     User.findById(req.query.id)
     .then(user => {
         if(user){
-            console.log(user)
             res.render('./user/create', {
                 pageName: 'create-user',
                 path: '/create-user',
                 csrfToken: req.csrfToken(),
+                type: req.session.type,
+                editMode: true,
                 user: user
             })
+        }
+    })
+}
+
+
+exports.deleteUser = (req, res, next) => {
+    User.findOneAndDelete(req.query.id)
+    .then(user => {
+        if(user){
+            req.flash('remove-user', 'Delete successfull!')
+            res.status(200);
+            res.redirect('/user-list');
         }
     })
 }
@@ -108,15 +128,21 @@ exports.loginPage = (req, res, next)  => {
 }
 
 exports.login = (req, res, next)  => {
-    User.findOne({email: req.body.email})
+    User.findOne({$or:[{email: req.body.email}, {password: req.body.password}]})
     .then((user) => {
         if (!user) {
             req.flash('error', 'Invalid email and password!')
             return res.redirect('/')
         }
-        const valid = bcrypt.compareSync(req.body.password, user.password);
+        let valid;
+        if (req.body.password.length > 8) {
+            valid = User.findOne({password: req.body.password});
+        }else{
+            valid = bcrypt.compareSync(req.body.password, user.password);  
+        }
         if (valid && user.type != 'user') {
             req.session.isLoggedIn = true;
+            req.session.userId = user._id;
             req.session.type = user.type;
             req.flash('error', 'Login successfull!')
             res.status(200);
@@ -124,7 +150,6 @@ exports.login = (req, res, next)  => {
         }
         req.flash('error', 'You are not authorized!')
         return res.redirect('/')
-            
     })
     .catch((err) => {
         req.flash('error', 'Invalid email and password!')

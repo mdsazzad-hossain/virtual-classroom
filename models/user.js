@@ -8,6 +8,10 @@ const userSchema = new Schema({
     max: 50,
     required: true
   },
+  student_id: {
+    type: String,
+    required: false
+  },
   email: {
     type: String,
     required: true
@@ -22,6 +26,11 @@ const userSchema = new Schema({
     type: String,
     default: 'user',
     required: false,
+  },
+  classId: {
+    type: Schema.Types.ObjectId,
+    ref: 'User',
+    required: false
   }
 });
 

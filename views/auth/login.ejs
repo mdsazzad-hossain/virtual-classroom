@@ -7,6 +7,7 @@
     <div class="card">
       <div class="card-body login-card-body">
         <p class="text-danger text-center"><%= errorMessage %></p>
+        <p class="text-success text-center"><%= message %></p>
         <p class="login-box-msg">Sign in to start your session</p>
         <form action="/login" method="post">
           <input type="hidden" name="_csrf" value="<%= csrfToken %>">

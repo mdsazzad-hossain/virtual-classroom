@@ -123,7 +123,8 @@ exports.loginPage = (req, res, next)  => {
         pageName: 'user-login', 
         csrfToken: req.csrfToken(), 
         q: req.query.q || '', 
-        errorMessage: req.flash('error')
+        errorMessage: req.flash('error'),
+        message: req.flash('message')
     });
 }
 
@@ -140,7 +141,7 @@ exports.login = (req, res, next)  => {
         }else{
             valid = bcrypt.compareSync(req.body.password, user.password);  
         }
-        if (valid && user.type != 'user') {
+        if (valid) {
             req.session.isLoggedIn = true;
             req.session.userId = user._id;
             req.session.type = user.type;

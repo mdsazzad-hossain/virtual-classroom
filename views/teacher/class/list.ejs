@@ -23,7 +23,7 @@
                       <td><%= index+1 %></td>
                       <td><%= item.name %></td>
                       <td><%= item.description %></td>
-                      <td><%= item.invite_code %></td>
+                      <td>http://localhost:3001/student-register?invitation-code=<%= item.invite_code %></td>
                       <td>
                           <a href="/edit-class?id=<%= item._id%>" class="btn btn-primary btn-xs">
                               <i class="fa fa-pen"></i>
